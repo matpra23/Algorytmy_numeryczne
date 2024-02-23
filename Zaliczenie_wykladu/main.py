@@ -1,4 +1,4 @@
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 #wizualizacja danych w układzie x, F(x,y) dla każdej linii y=const
@@ -8,6 +8,8 @@ def func(x):
 
 def visual(x, func):
     ...
+    plt.xlabel()
+    plt.ylabel()
     plt.show()
 
 #- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)
