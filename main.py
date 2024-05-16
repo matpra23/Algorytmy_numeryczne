@@ -1,39 +1,59 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-#wizualizacja danych w układzie x, F(x,y) dla każdej linii y=const
+# #wizualizacja danych w układzie x, F(x,y) dla każdej linii y=const
 
 # Definicja funkcji F(x, y)
-x = np.loadtxt('x.txt')
-y = np.loadtxt('y.txt')
-def F(x, y):
-    return np.sin(x) + np.cos(y)
+dane = np.loadtxt('138305.txt')
+y = dane[:,1]
+def z1_wizualizacja():
+    for i in y:
+        points = dane[dane[:, 1] == i]  #wybieranie punktu dla konkretnej wartosci y 
+        x = points[:, 0]
+        F_xy = points[:, 2]
+    
+        plt.plot(x, F_xy)  
 
-# Zakres x i y
-x = np.linspace(-2*np.pi, 2*np.pi, 100)
-y = np.linspace(-2*np.pi, 2*np.pi, 100)
+    plt.xlabel('x')
+    plt.ylabel('F(x,y)')
+    plt.title('Wizualizacja danych F(x, y) dla każdej linii y=const')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
-# Tworzenie siatki danych X i Y
-X, Y = np.meshgrid(x, y)
-
-# Wartości funkcji F(x, y) dla siatki danych
-Z = F(X, Y)
-
-# Wizualizacja danych dla każdej linii y=const
-plt.figure(figsize=(10, 6))
-for i in range(len(y)):
-    plt.plot(x, Z[i, :], label=f"y = {y[i]:.2f}")
-
-plt.xlabel('x')
-plt.ylabel('F(x,y)')
-plt.title('Wizualizacja danych F(x, y) dla każdej linii y=const')
-plt.legend()
-plt.grid(True)
-plt.show()
+z1_wizualizacja()
 
 #- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)
+def z2_srednia_mediana_odchylenie():
+    # obliczanie:
+    mean = []
+    median = []
+    std_deviation = []
+
+    for i in y:
+        points = dane[dane[:, 1] == i]
+        F_xy = points[:, 2]
+    
+        mean.append(np.mean(F_xy))
+        median.append(np.median(F_xy))
+        std_deviation.append(np.std(F_xy))
+
+    # wykres słupkowy:
+    x_values = np.arange(len(y))
+    width = 0.2
+
+    plt.bar(x_values, mean, width, color='red', label='Średnia')
+    plt.bar(x_values + width, median, width, label='Mediana')
+    plt.bar(x_values + 2*width, std_deviation, width, label='Odchylenie standardowe')
+    plt.legend()
+
+    plt.show()
+
+z2_srednia_mediana_odchylenie()
 
 #- wyznaczyć jedną funkcję interpolacyjną wielomianową dla wybranej współrzędnej y  z siatki (obowiązkowo)
+
+
 
 #- wyznaczyć funkcję interpolacyjną sklejaną dla wybranej współrzędnej y  z siatki (obowiązkowo) 
 
