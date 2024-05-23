@@ -11,8 +11,7 @@ def z1_wizualizacja():
         points = dane[dane[:, 1] == i]  #wybieranie punktu dla konkretnej wartosci y 
         x = points[:, 0]
         F_xy = points[:, 2]
-    
-        plt.plot(x, F_xy)  
+        plt.plot(x, F_xy)
 
     plt.xlabel('x')
     plt.ylabel('F(x,y)')
