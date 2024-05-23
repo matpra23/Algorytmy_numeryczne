@@ -318,9 +318,9 @@ def aproksymacja_f_kwadratowa():
 
 
 # wizualizacja_danych()
-# srednia_mediana_odchylenie()
+srednia_mediana_odchylenie()
 # interpolacja()
 # interpolacja_splajn()
-porownanie_interpolacji()
+#porownanie_interpolacji()
 # aproksymacja_f_liniowa()
 # aproksymacja_f_kwadratowa()

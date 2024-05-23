@@ -5,8 +5,8 @@ import numpy as np
 
 # Definicja funkcji F(x, y)
 dane = np.loadtxt('138305.txt')
-y = dane[:,1]
 x = dane[:,0]
+y = dane[:,1]
 f = dane[:,2]
 def z1_wizualizacja():
     xn = np.split(x,6)
@@ -24,20 +24,22 @@ def z1_wizualizacja():
 
 #z1_wizualizacja()
 
-#- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)
+#- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)z    
+
 def z2_srednia_mediana_odchylenie():
     # obliczanie:
     xn = np.split(x,6)
     yn = np.split(y,6)
     fn = np.split(f,6)
+
     srednia = []
     mediana = []
-    odchylenie_st = []
+    odchylenie_standardowe = []
 
-    for i in yn: 
-        srednia.append(np.mean(fn))
-        mediana.append(np.median(fn))
-        odchylenie_st.append(np.std(fn))
+    for i in fn: 
+        srednia.append(np.mean(i))
+        mediana.append(np.median(i))
+        odchylenie_standardowe.append(np.std(i))
 
     # wykres słupkowy:
     xn = np.arange(len(yn))
@@ -45,13 +47,12 @@ def z2_srednia_mediana_odchylenie():
 
     plt.bar(xn, srednia, width, color='red', label='Średnia')
     plt.bar(xn + width, mediana, width, label='Mediana')
-    plt.bar(xn + 2*width, odchylenie_st, width, label='Odchylenie standardowe')
+    plt.bar(xn + 2*width, odchylenie_standardowe, width, label='Odchylenie standardowe')
     plt.title('Analiza danych: srednia, meidana, odchylanie standardowe')
     plt.legend()
-
     plt.show()
 
-z2_srednia_mediana_odchylenie()
+#z2_srednia_mediana_odchylenie()
 
 #- wyznaczyć jedną funkcję interpolacyjną wielomianową dla wybranej współrzędnej y  z siatki (obowiązkowo)
 
@@ -68,15 +69,15 @@ def z3_interpolacja_wielomianowa():
 
     #wykres oryginalnych danych i interpolacji wielomianowej
     plt.scatter(wybrane_x, f_wybrane, label='Dane')
-    x_range = np.linspace(min(wybrane_x), max(wybrane_x), 10)
-    plt.plot(x_range, poly_func(x_range), label='Interpolacja wielomianowa', color='red')
+    x_zakres = np.linspace(min(wybrane_x), max(wybrane_x), 10)
+    plt.plot(x_zakres, poly_func(x_zakres), label='Interpolacja wielomianowa', color='red')
     plt.xlabel('x')
     plt.ylabel('F(x,y)')
     plt.title('Interpolacja wielomianowa')
     plt.legend()
     plt.show()
 
-# z3_interpolacja_wielomianowa()
+#z3_interpolacja_wielomianowa()
 
 #- wyznaczyć funkcję interpolacyjną sklejaną dla wybranej współrzędnej y  z siatki (obowiązkowo) 
 
