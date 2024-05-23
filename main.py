@@ -6,13 +6,15 @@ import numpy as np
 # Definicja funkcji F(x, y)
 dane = np.loadtxt('138305.txt')
 y = dane[:,1]
+x = dane[:,0]
+f = dane[:,2]
 def z1_wizualizacja():
-    for i in y:
-        points = dane[dane[:, 1] == i]  #wybieranie punktu dla konkretnej wartosci y 
-        x = points[:, 0]
-        F_xy = points[:, 2]
-        plt.plot(x, F_xy)
+    xn = np.split(x,6)
+    yn = np.split(y,6)
+    fn = np.split(f,6)
 
+    for i in range(6):
+        plt.plot(xn[i], fn[i], '-o', label=f"y = {yn[i][0]}")
     plt.xlabel('x')
     plt.ylabel('F(x,y)')
     plt.title('Wizualizacja danych F(x, y) dla każdej linii y=const')
@@ -20,30 +22,31 @@ def z1_wizualizacja():
     plt.grid(True)
     plt.show()
 
-z1_wizualizacja()
+#z1_wizualizacja()
 
 #- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)
 def z2_srednia_mediana_odchylenie():
     # obliczanie:
-    mean = []
-    median = []
-    std_deviation = []
+    xn = np.split(x,6)
+    yn = np.split(y,6)
+    fn = np.split(f,6)
+    srednia = []
+    mediana = []
+    odchylenie_st = []
 
-    for i in y:
-        points = dane[dane[:, 1] == i]
-        F_xy = points[:, 2]
-    
-        mean.append(np.mean(F_xy))
-        median.append(np.median(F_xy))
-        std_deviation.append(np.std(F_xy))
+    for i in yn: 
+        srednia.append(np.mean(fn))
+        mediana.append(np.median(fn))
+        odchylenie_st.append(np.std(fn))
 
     # wykres słupkowy:
-    x_values = np.arange(len(y))
+    xn = np.arange(len(yn))
     width = 0.2
 
-    plt.bar(x_values, mean, width, color='red', label='Średnia')
-    plt.bar(x_values + width, median, width, label='Mediana')
-    plt.bar(x_values + 2*width, std_deviation, width, label='Odchylenie standardowe')
+    plt.bar(xn, srednia, width, color='red', label='Średnia')
+    plt.bar(xn + width, mediana, width, label='Mediana')
+    plt.bar(xn + 2*width, odchylenie_st, width, label='Odchylenie standardowe')
+    plt.title('Analiza danych: srednia, meidana, odchylanie standardowe')
     plt.legend()
 
     plt.show()
@@ -53,27 +56,27 @@ z2_srednia_mediana_odchylenie()
 #- wyznaczyć jedną funkcję interpolacyjną wielomianową dla wybranej współrzędnej y  z siatki (obowiązkowo)
 
 def z3_interpolacja_wielomianowa():
-    chosen_y = y[0]
+    wybrane_y = y[0]
 
     #punkty dla wybranego y
-    chosen_points = dane[dane[:, 1] == chosen_y]
-    x_chosen = chosen_points[:, 0]
-    F_chosen = chosen_points[:, 2]
+    wybrane_punkty = dane[dane[:, 1] == wybrane_y]
+    wybrane_x = wybrane_punkty[:, 0]
+    f_wybrane = wybrane_punkty[:, 2]
     #interpolacja wielomianowa
-    poly_interp = np.polyfit(x_chosen, F_chosen, deg=len(x_chosen)-1)
+    poly_interp = np.polyfit(wybrane_x, f_wybrane, deg=len(wybrane_x)-1)
     poly_func = np.poly1d(poly_interp)
 
     #wykres oryginalnych danych i interpolacji wielomianowej
-    plt.scatter(x_chosen, F_chosen, label='Dane')
-    x_range = np.linspace(min(x_chosen), max(x_chosen), 100)
+    plt.scatter(wybrane_x, f_wybrane, label='Dane')
+    x_range = np.linspace(min(wybrane_x), max(wybrane_x), 10)
     plt.plot(x_range, poly_func(x_range), label='Interpolacja wielomianowa', color='red')
     plt.xlabel('x')
     plt.ylabel('F(x,y)')
-    plt.title('Interpolacja wielomianowa dla y = ' + str(chosen_y))
+    plt.title('Interpolacja wielomianowa')
     plt.legend()
     plt.show()
 
-z3_interpolacja_wielomianowa()
+# z3_interpolacja_wielomianowa()
 
 #- wyznaczyć funkcję interpolacyjną sklejaną dla wybranej współrzędnej y  z siatki (obowiązkowo) 
 
@@ -135,7 +138,7 @@ def z4_interpolacja_splajn():
     plt.grid(True)
     plt.show()
 
-z4_interpolacja_splajn()
+#z4_interpolacja_splajn()
 
 #- dokonaj porównania funkcji interpolacyjnych 
 
@@ -217,7 +220,7 @@ def z5_porownanie_funkcji_interpolacyjnych():
     plt.legend()
     plt.show()
 
-z5_porownanie_funkcji_interpolacyjnych()
+#z5_porownanie_funkcji_interpolacyjnych()
 
 #- wyznaczyć dwie funkcje aproksymacyjne dla wybranej jednej współrzędnej y  z siatki - obowiązkowo jedna funkcja
 
