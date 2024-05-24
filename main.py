@@ -22,7 +22,7 @@ def z1_wizualizacja():
     plt.grid(True)
     plt.show()
 
-#1_wizualizacja()
+#z1_wizualizacja()
 
 #- wyznaczyć średnią, medianę, odchylenie standardowe z podziałem na współrzędne y, prezentacja na wykresie słupkowym (obowiązkowo)z    
 
@@ -135,13 +135,13 @@ def z3_interpolacja():
     plt.grid(True)
     plt.show()  
 
-z3_interpolacja()
+#z3_interpolacja()
 
 #- wyznaczyć funkcję interpolacyjną sklejaną dla wybranej współrzędnej y  z siatki (obowiązkowo) 
 def f_macierzy(X, xi, h):
     xmacierz1 = xi - h
     xmacierz2 = xi - (2*h)
-
+    xi = xi
     xi_pkt1 = xi + h
     xi_pkt2 = xi + h * 2
 
@@ -166,7 +166,7 @@ def znajdz_wartosc(x, f):
         w[i,i+1] = 1
     w[0,0] = -3/h
     w[len2-1, len2-1] = 3/h
-    w[0,2] = -3/h
+    w[0,2] = 3/h
     w[len2-1, len2-3] = -3/h
 
     y1 = np.zeros(len2)
@@ -175,24 +175,26 @@ def znajdz_wartosc(x, f):
     y1[len2-1] = -1
     return interpolacja_gaussa(w, y1)
 
-def s(x, k , X):
-    rez = 0
+def funct(x, k , X):
+    temp = 0
     x2 = np.zeros(len(x)+2)
     x2[1:len(x)+1] = x[:]
     x2[0] = -0.1
     x2[len(x2)-1] = 4.1
     for i in range(len(x2)):
-        rez += f_macierzy(X, x2[i], 0.1) * k[i]
-    return rez
+        temp += f_macierzy(X, x2[i], 0.1) * k[i]
+    return temp
 
 def z4_interpolacja_sklejana():
-    k = znajdz_wartosc(x[0], f[0])
+    xn = np.split(x, 6)
+    fn = np.split(f, 6)
+    k = znajdz_wartosc(xn[0], fn[0])
     x_s = np.linspace(0, 4, 1000)
     y1 = np.zeros(len(x_s))
     for i in range(len(x_s)):
-        y1[i] = s(x[0], k, x_s[i])
+        y1[i] = funct(xn[0], k, x_s[i])  #setting an array element with a sequence.
 
-    plt.plot(x[0], f[0], 'o', label = "pkt. oryginalne")
+    plt.plot(xn[0], fn[0], 'o', label = "pkt. oryginalne")
     plt.plot(x_s, y1, label = "Interpolacja splajn")
     plt.xlabel('X')
     plt.ylabel('F(x)')
@@ -201,7 +203,7 @@ def z4_interpolacja_sklejana():
     plt.grid(True)
     plt.show()
 
-#z4_interpolacja_sklejana()
+z4_interpolacja_sklejana()
 
 #- dokonaj porównania funkcji interpolacyjnych 
 
