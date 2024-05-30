@@ -215,3 +215,4 @@ calkaLag = calkPr(lagrange[0], lagrange[1])
 print("Wynik całki metodą prostokątów z interpolacji Lagrange'a: ", calkaLag) 
 calkaSplajn = calkPr(bsplajn[0], bsplajn[1])
 print("Wynik całki metodą prostokątów z interpolacji B-splajn: ", calkaSplajn) 
+#

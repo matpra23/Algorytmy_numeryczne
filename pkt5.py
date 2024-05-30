@@ -95,5 +95,5 @@ dane = np.loadtxt('138305.txt')
 stala = 0.3
 x = dane[dane[:, 1] == stala, 0]
 f = dane[dane[:, 1] == stala, 2]
-
+#
 rysunek(x, f)

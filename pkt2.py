@@ -40,6 +40,5 @@ def srednia_mediana_odchylenie():
     plt.title('Analiza: średnia, mediana, odchylenie standardowe')
     plt.legend()
     plt.show()
-
-
+#
 srednia_mediana_odchylenie()

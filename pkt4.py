@@ -100,4 +100,5 @@ def rysuj_interpolacje(x, y, f, p):
     plt.grid()
     plt.legend()
     plt.show()
+#
 rysuj_interpolacje(x, y, z, stala)

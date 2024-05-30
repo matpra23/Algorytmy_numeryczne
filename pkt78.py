@@ -51,3 +51,4 @@ plt.ylabel("Wartości pochodnej")
 plt.legend()
 plt.grid(True)
 plt.show()
+#
