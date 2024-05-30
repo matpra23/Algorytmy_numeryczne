@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 dane = np.loadtxt('138305.txt')
 x = dane[:, 0]
-y = dane[:, 1]
+y = 0.3
 f = dane[:, 2]
 
 def interpolacja_gaussa(P, R):

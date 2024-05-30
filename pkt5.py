@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 dane = np.loadtxt('138305.txt')
-stala = 0.2
+stala = 0.3
 x = dane[dane[:, 1] == stala, 0]
 f = dane[dane[:, 1] == stala, 2]
 
@@ -96,7 +96,7 @@ def rysunek():
     plt.plot(kwadratowa[0], kwadratowa[1], label="Aproksymacja kwadratowa", color='blue')
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title("Wykres aproksymacji dla stałej y = 0.2")
+    plt.title("Wykres aproksymacji dla stałej y = 0.3")
     plt.legend()
     plt.show()
 

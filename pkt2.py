@@ -25,6 +25,15 @@ def srednia_mediana_odchylenie():
     xn = np.arange(len(yn))
     width = 0.2
 
+    print("Wartosci sredniej: ")
+    print(srednia)
+    print("")
+    print("Wartosci mediany: ")
+    print(mediana)
+    print("")
+    print("Wartosci odchylenia standardowego: ")
+    print(odchylenie_standardowe)
+
     plt.bar(xn, srednia, width, color='red', label='Średnia')
     plt.bar(xn + width, mediana, width, label='Mediana')
     plt.bar(xn + 2 * width, odchylenie_standardowe, width, label='Odchylenie standardowe')

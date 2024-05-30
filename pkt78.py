@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 dane = np.loadtxt('138305.txt')
 
-stala = 0.2
+stala = 0.3
 x = []
 y = []
 f = []
@@ -41,7 +41,7 @@ for i in range(n):
 lin = np.linspace(x[0], x[-1], y.shape[0])
 
 print("Przedziały monotoniczności funkcji:", monotonicznosc)
-plt.title("Przedziały monotoniczności dla stałej y = 0.2")
+plt.title("Przedziały monotoniczności dla stałej y = 0.3")
 plt.plot(lin, monotonicznosc, '-', label="monotoniczność funkcji", color='b')
 plt.plot(lin, y, label='y', color='r')
 plt.xlabel("X")
@@ -51,7 +51,7 @@ plt.grid(True)
 plt.show()
 
 print("Wartości pochodnej:", pochodna)
-plt.title("Wykres pochodnej dla stałej y = 0.2")
+plt.title("Wykres pochodnej dla stałej y = 0.3")
 plt.plot(lin, pochodna, '-o', label="Wykres pochodnej", color='b')
 plt.xlabel("X")
 plt.ylabel("Wartości pochodnej")
