@@ -207,11 +207,11 @@ def calkPr(x, y):
         calka += h * y[i] 
     return calka
 
-calkaLag = calkPr(lagrange[0], lagrange[1])
-print("Calka metodą prostokątów z interpolacji lagrange'a: ", calkaLag) 
-calkaSplajn = calkPr(bsplajn[0], bsplajn[1])
-print("Calka metodą prostokątów z interpolacji b-splajn: ", calkaSplajn) 
 calkaAproksymacjaLiniowa = calkPr(aproksymacjaLiniowa[0], aproksymacjaLiniowa[1]) 
-print("Całka metodą prostokątów z aproksymacji liniowej: ", calkaAproksymacjaLiniowa) 
+print("Wynik całki metodą prostokątów z aproksymacji liniowej: ", calkaAproksymacjaLiniowa) 
 calkaAproksymacjaKwadratowa = calkPr(aproksymacjaKwadratowa[0], aproksymacjaKwadratowa[1])
-print("Całka metodą prostokątów z aproksymacji kwadratowej: ", calkaAproksymacjaKwadratowa)
+print("Wynik całki metodą prostokątów z aproksymacji kwadratowej: ", calkaAproksymacjaKwadratowa)
+calkaLag = calkPr(lagrange[0], lagrange[1])
+print("Wynik całki metodą prostokątów z interpolacji Lagrange'a: ", calkaLag) 
+calkaSplajn = calkPr(bsplajn[0], bsplajn[1])
+print("Wynik całki metodą prostokątów z interpolacji B-splajn: ", calkaSplajn) 

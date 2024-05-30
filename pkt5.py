@@ -2,11 +2,6 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
-dane = np.loadtxt('138305.txt')
-stala = 0.3
-x = dane[dane[:, 1] == stala, 0]
-f = dane[dane[:, 1] == stala, 2]
-
 def interpolacja_gaussa(P, R):
     n = P.shape[0]
     M = np.zeros([n, n+1])
@@ -27,7 +22,7 @@ def interpolacja_gaussa(P, R):
         x[i] = (M[i, n] - sum) / M[i, i]
     return x
 
-def aproksymacja_liniowa():
+def aproksymacja_liniowa(x, f):
     n = x.shape[0]
     M = np.zeros((2, 2))
     P = np.zeros(2)
@@ -41,7 +36,7 @@ def aproksymacja_liniowa():
     a = interpolacja_gaussa(M, P)
     return a
 
-def aproksymacja_kwadratowa():
+def aproksymacja_kwadratowa(x, f):
     n = x.shape[0]
     M = np.zeros((3, 3))
     P = np.zeros(3)
@@ -61,33 +56,29 @@ def aproksymacja_kwadratowa():
     a = interpolacja_gaussa(M, P)
     return a
 
-liniowaWspolczynniki = aproksymacja_liniowa()
-kwadratowaWspolczynniki = aproksymacja_kwadratowa()
+def true_function(x, a):
+    return a[0] + a[1] * x
 
-def true_function(x):
-    return liniowaWspolczynniki[0] + liniowaWspolczynniki[1] * x
+def true_function_kwadrat(x, a):
+    return a[0] + a[1] * x + a[2] * x * x
 
-def true_function_kwadrat(x):
-    return kwadratowaWspolczynniki[0] + kwadratowaWspolczynniki[1] * x + kwadratowaWspolczynniki[2] * x * x
-
-
-def macierze_aproksymacjaLiniowa():
+def macierze_aproksymacja(x, a, func):
     macierz_y = np.zeros(100 * (int(21 / 3)))
     macierz_x = np.linspace(x[0], x[x.shape[0] - 1], 100 * (int(21 / 3)))
     for i in range(100 * (int(21 / 3))):
-        macierz_y[i] = true_function(macierz_x[i])
+        macierz_y[i] = func(macierz_x[i], a)
     return macierz_x, macierz_y
 
+def rysunek(x, f):
+    liniowaWspolczynniki = aproksymacja_liniowa(x, f)
+    kwadratowaWspolczynniki = aproksymacja_kwadratowa(x, f)
 
-def macierze_aproksymacjaKwadratowa():
-    macierz_y = np.zeros(100 * (int(21 / 3)))
-    macierz_x = np.linspace(x[0], x[x.shape[0] - 1], 100 * (int(21 / 3)))
-    for i in range(100 * (int(21 / 3))):
-        macierz_y[i] = true_function_kwadrat(macierz_x[i])
-    return macierz_x, macierz_y
+    def macierze_aproksymacjaLiniowa():
+        return macierze_aproksymacja(x, liniowaWspolczynniki, true_function)
 
+    def macierze_aproksymacjaKwadratowa():
+        return macierze_aproksymacja(x, kwadratowaWspolczynniki, true_function_kwadrat)
 
-def rysunek():
     liniowa = macierze_aproksymacjaLiniowa()
     kwadratowa = macierze_aproksymacjaKwadratowa()
 
@@ -100,4 +91,9 @@ def rysunek():
     plt.legend()
     plt.show()
 
-rysunek()
+dane = np.loadtxt('138305.txt')
+stala = 0.3
+x = dane[dane[:, 1] == stala, 0]
+f = dane[dane[:, 1] == stala, 2]
+
+rysunek(x, f)

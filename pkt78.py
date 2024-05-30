@@ -5,9 +5,7 @@ import matplotlib.pyplot as plt
 dane = np.loadtxt('138305.txt')
 
 stala = 0.3
-x = []
-y = []
-f = []
+x, y, f = [], [], []
 
 for i in range(dane.shape[0]):
     if dane[i][1] == stala:
@@ -31,12 +29,7 @@ for i in range(n):
     else:
         pochodna[i] = (f[i+1] - f[i-1]) / (x[i+1] - x[i-1])
     
-    if pochodna[i] > 0:
-        monotonicznosc[i] = 1
-    elif pochodna[i] < 0:
-        monotonicznosc[i] = -1
-    else:
-        monotonicznosc[i] = 0
+    monotonicznosc[i] = np.sign(pochodna[i])
 
 lin = np.linspace(x[0], x[-1], y.shape[0])
 
